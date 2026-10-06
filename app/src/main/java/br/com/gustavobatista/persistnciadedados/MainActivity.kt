@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             PersistênciaDeDadosTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
                 }
             }
         }
