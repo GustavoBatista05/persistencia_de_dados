@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Persistência De Dados</string>
+    <string name="title_activity_cadastro">Cadastro</string>
 </resources>
