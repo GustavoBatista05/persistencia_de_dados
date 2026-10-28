@@ -1,5 +1,6 @@
 package br.com.gustavobatista.persistnciadedados
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,6 +13,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.gustavobatista.persistnciadedados.ui.theme.PersistênciaDeDadosTheme
 
@@ -30,13 +33,21 @@ class MainActivity : ComponentActivity() {
     private fun telaPrincipal() {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
-            floatActionButton = {
+            floatingActionButton = {
                 FloatingActionButton(
                     onClick = {
+                        val intent = Intent(
+                            this@MainActivity,
+                            Cadastro::class.java)
+                        startActivity(intent)
                     }
                 ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(R.drawable.icon_add),
+                        contentDescription = "Botão adicionar registro"
+                    )
                 }
             }
-        )
+        ) {}
     }
 }
