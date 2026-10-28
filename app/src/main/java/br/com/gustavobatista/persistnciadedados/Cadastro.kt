@@ -26,8 +26,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
+import br.com.gustavobatista.persistnciadedados.db.DB
 import br.com.gustavobatista.persistnciadedados.domain.Pessoa
 import br.com.gustavobatista.persistnciadedados.ui.theme.PersistênciaDeDadosTheme
+import kotlinx.coroutines.launch
 
 class Cadastro : ComponentActivity() {
     var pessoa by mutableStateOf(
@@ -45,6 +48,7 @@ class Cadastro : ComponentActivity() {
         setContent {
             PersistênciaDeDadosTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    criarCampos()
                 }
             }
         }
@@ -90,10 +94,21 @@ class Cadastro : ComponentActivity() {
             Spacer(modifier = Modifier.height(8.dp))
 
             Row() {
-                Button(onClick = {}) {
+                Button(onClick = {
+                    lifecycleScope.launch {
+                        salvar()
+                    }
+                }) {
                     Text("Salvar")
                 }
             }
         }
+    }
+
+    suspend fun salvar() {
+        val db = DB.DatabaseProvider.getDatabase(this@Cadastro)
+        val dao = db.PessoaDAO()
+
+        dao.inserir(pessoa)
     }
 }
